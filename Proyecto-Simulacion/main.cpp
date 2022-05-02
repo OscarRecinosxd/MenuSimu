@@ -6,7 +6,7 @@ using namespace std;
 
 int main(){
 
-    ShowMenu();
+    Menu();
     
     return 0;
 }
