@@ -4,12 +4,11 @@ using namespace std;
 
 int main(){
     //int a = '6';
-    int a = 'a';
+    int option;
+    cin>>option;
+    cin.ignore();
 
-    char b = 50;
-
-    cout<<a<<endl;
-    cout<<b;
+    cout<<option<<endl;
 
     return 0;
 }

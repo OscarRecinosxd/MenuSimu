@@ -15,14 +15,17 @@ enum options {Visualizar = 1, Agregar, Modificar, Remover, Salir};
 
 void Menu(){
     int option = 0;
+    string optionAux = "";
 
     do
-    {
+    {   
+        int option = 0;
         int* Indexes = createIntArray(7);
         ShowMenu();
         cin>>option;
+        cin.clear();
         cin.ignore();
-
+        
         switch (option)
         {
             case Visualizar:
