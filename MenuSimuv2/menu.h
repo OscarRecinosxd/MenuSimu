@@ -19,12 +19,11 @@ void Menu(){
 
     do
     {   
-        int option = 0;
         int* Indexes = createIntArray(7);
         ShowMenu();
         cin>>option;
         cin.clear();
-        cin.ignore();
+        cin.ignore(10000, '\n');
         
         switch (option)
         {
@@ -62,7 +61,7 @@ void Menu(){
 
                 break;
             case Salir:
-                cout<<"Saliendo......"<<endl;
+                cout<<"Saliendo......"<<endl<<endl;
                 
                 break;
             
@@ -75,13 +74,14 @@ void Menu(){
 }
 
 bool IsValidChain(int option, int* Indexes){
-    volver:
     int CounterCharsValid = 0;
     bool hasN = false;
     string Chain = "";
     cout<<"Ingrese la cadena de texto"<<endl;
     cin>>Chain;
-    cin.ignore();
+    cin.clear();
+    cin.ignore(10000, '\n');
+    cout<<endl;
 
 
     //Valida si la cadena tiene 12 caracteres
@@ -112,7 +112,6 @@ bool IsValidChain(int option, int* Indexes){
             if(option == 3 ){
                 if(hasN){
                     cout<<"Solo se puede editar la informacion del ultimo nivel "<<endl;
-                    goto volver;
                     return false;
                 }
                 if(hasN == false){
@@ -137,20 +136,17 @@ bool IsValidChain(int option, int* Indexes){
         }
         else{
             cout<<"Ingrese un formato correcto"<<endl;
-            goto volver;
             return false;
         }
         
     } else {
         cout<<"Ingrese un formato correcto"<<endl;
-        goto volver;
         return false;
     }
 
     Chain="";
     CounterCharsValid=0;
     cout<<"INGRESE UN FORMATO CORRECTO "<<endl;
-    goto volver;
     return false;
 }
 
@@ -216,6 +212,7 @@ void ShowMenu(){
 }
 
 void ShowArray(int* Indexes){
+    cout<<endl;
     for (int i = 0; i < 7 ; i++)
     {
         cout<<"Indice "<<i<<" es "<<Indexes[i]<<endl;
