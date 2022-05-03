@@ -6,21 +6,26 @@
 using namespace std;
 
 void ShowMenu();
-int *GetChain(int*,int);
+void GetChain(int*,int);
 bool isChainFormatCorrect(string,int);
-int *GetIds(string,int*);
+void GetIds(string,int*);
 void ShowMenuOptions();
 void ShowIndexes(int*);
-
+bool Valid(string);
 
 void Menu(){
     int option;
     //char opcionAux;
-    int* Indexes = createIntArray(7);
     do{
         ShowMenuOptions();
+        int* Indexes = createIntArray(7);
+        string Chain;
         //TODO manejar validacion que el usuario no ponga letras en la opcion del menu
         cin>>option;
+
+        cout<<"Ingrese la cadena de texto "<<endl;
+        cin>>Chain;
+        cin.ignore();
         
         switch (option)
         {
@@ -31,45 +36,48 @@ void Menu(){
         case 2:
             //TODO Agregar informacion
             GetChain(Indexes,option);
+            //Para ver los indices que ingresó
+            ShowIndexes(Indexes);
             break;
 
         case 3:
             //TODO Editar informacion
             GetChain(Indexes,option);
+            //Para ver los indices que ingresó
+            ShowIndexes(Indexes);
             break;
 
         case 4:
             //TODO Remover informacion
-            //Indexes = GetChain();
-            cout<<"HOla xd";
+            GetChain(Indexes,option);
+            //Para ver los indices que ingresó
+            ShowIndexes(Indexes);
             break;
 
         default:
             cout<<"Ingrese una opcion correcta"<<endl;
             break;
         }
-    
-
         //TODO validar que el programa no truene si se ingresa una letra
     }while(option!=5);
 
 }
 
-int *GetChain(int* Indexes,int option){
+void GetChain(int* Indexes,int option){
+
     string Chain;
     cout<<"Ingrese la cadena de texto "<<endl;
     cin>>Chain;
     cin.ignore();
-
+    //Mira si el formato de la cadena es correcto o no
     if(isChainFormatCorrect(Chain,option)){
-        Indexes=GetIds(Chain,Indexes);
+        //Aqui se obtienen los ids de la cadena de texto y se almacenan en un arreglo
+        GetIds(Chain,Indexes);
     }
     else{
         Indexes[0] = 0;
-        return Indexes;
     }
-
-    return Indexes;
+    return;
 
 }
 
@@ -79,8 +87,6 @@ bool isChainFormatCorrect(string Chain,int option){
         cout<<"La cadena no tiene un formato correcto---"<<endl<<endl;
             return false;
     } 
-
-    cout<<Chain.size()<<endl;
 
     if(Chain.size() == 12){
         if(((idN % 2 == 0 && idN >=2)|| idN == -1 ) && Chain.length()==12){
@@ -95,11 +101,10 @@ bool isChainFormatCorrect(string Chain,int option){
         cout<<"La cadena no tiene un formato  XDDD"<<endl<<endl;
         return false;
     }
-        
-    
+
 }
 
-int *GetIds(string Chain, int *Indexes){
+void GetIds(string Chain, int *Indexes){
     int idN = Chain.find_first_of('N');
     if (idN == -1){
         Indexes[0] = 5;
@@ -147,9 +152,7 @@ int *GetIds(string Chain, int *Indexes){
         Indexes[0] = 1;
         Indexes[1] = stoi(Chain.substr(0,2));
     }
-
-
-    return Indexes; 
+    return; 
 }
 
 void ShowMenuOptions(){
@@ -165,8 +168,22 @@ void ShowIndexes(int* i){
     cout<<"Numero de nivel: "<<i[0]<<endl;
     cout<<"El nodo del grafo es: "<<i[1]<<endl;
     cout<<"El nodo del arbol es: "<<i[2]<<endl;
-    cout<<"La fila de la matriz es: "<<i[3]<<endl;
-    cout<<"La columna de la matriz es: "<<i[4]<<endl;
-    cout<<"El nodo del arreglo es: "<<i[5]<<endl;
+    cout<<"El nodo de la lista es: "<<i[3]<<endl;
+    cout<<"La fila de la matriz es: "<<i[4]<<endl;
+    cout<<"La columna de la matriz es: "<<i[5]<<endl;
+    cout<<"El nodo del arreglo es: "<<i[6]<<endl;
     return;
+}
+
+bool Valid(string Chain){
+    for (int i = 0; i < Chain.size(); i++)
+    {
+        if((Chain.at(i) >= 48 && Chain.at(i) <= 57) || Chain.at(i)==110 || Chain.at(i)== 78){
+            
+        } 
+        else{
+            return false;
+        }
+        return true;
+    }
 }
